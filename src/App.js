@@ -1,24 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react'
 
+import data from "./data.json"
+import Accordian from './Component/accordian';
 function App() {
+  var vals = data.data.menu
+  const [expanded, setExpanded] = useState(false)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1 className='heading'>FAQ</h1>
+      <div class="container">
+        {vals && vals.map((val) => (
+          val.items.length !== 0 ? val.items.map((item) => (
+            <Accordian item={item} expanded={expanded} setExpanded={setExpanded} />
+          )) : <Accordian name={val.name} expanded={false} />
+        )
+        )}
+      </div>
+
+    </>
   );
 }
 
