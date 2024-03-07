@@ -1,14 +1,14 @@
-// import { useState, useEffect } from 'react'
 import './accordian.css'
-const Accordian = (props) => {
-    // const [expanded, setExpanded] = useState(false)
 
+const Accordian = ({ item, isOpen, onToggle }) => {
+    const handleClick = () => {
+        onToggle(item.id)
+    }
     return (
         <>
-            {/* <div class="accordian" onClick={() => setExpanded(!expanded)}> */}
-            <div class="accordian" onClick={() => props.setExpanded(!props.expanded)}>
-                <h1>{props?.item ? props?.item?.name : props?.name}</h1>
-                <p>{(props.item && props.expanded) ? props.item.description : ''}</p>
+            <div className="accordian" onClick={!item.items ? handleClick : null} style={{ cursor: !item.items ? 'pointer' : 'default' }}>
+                <h1 className='text'>{item?.name}</h1>
+                {!item.items && isOpen && <p className='text'>{item.description}</p>}
             </div>
         </>
     )
